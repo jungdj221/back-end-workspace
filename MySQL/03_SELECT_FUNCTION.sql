@@ -310,8 +310,12 @@ FROM employee;
 -- 전 사원의 직원명, 보너스, 보너스 포함 연봉조회(급여 + 급여*보너스)*12
 SELECT emp_name, ifnull(bonus, 0)"보너스", (salary + salary * ifnull(bonus, 0))*12 "연봉"
 FROM employee;
--- 직원명, 부서코드 조회(없으면 '부서없음')
-SELECT emp_name, ifnull(dept_code, "부서없음") "dept_code"
+
+-- 직원명, 부서 코드가 있으면 '부서있음', 없으면 '부서없음'으로 조회 
+SELECT
+	emp_name, 
+    dept_code,
+    if(dept_code is not null, '부서있음', '부서없음')
 FROM employee;
 
 /*
