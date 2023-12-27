@@ -44,10 +44,15 @@ FROM customer_list
 WHERE id between 6 and 15
 ORDER BY id;
 
+SELECT id, name
+FROM customer_list
+ORDER BY ID
+LIMIT 5, 10;
+
 -- 7. actor 테이블에서 J로 시작하는 이름과 글자수 조회 (공백 X, 정렬은 글자수가 많은 사람 순으로)
 SELECT concat(first_name,' ',Last_name)'이름', char_length(concat(first_name, Last_name)) '글자수'
 FROM actor
-WHERE  instr(first_name, 'J') ='1'
+WHERE  instr(first_name, 'J') ='1' -- first_name LIKE 'J%'
 ORDER BY 2 desc;
 
 -- 8. film 테이블에서 description에서 of 이전 문장만 중복 없이 10개만 추출해서 조회
