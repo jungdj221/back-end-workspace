@@ -103,7 +103,7 @@ FROM employee
 WHERE dept_code = 'D5' OR salary > 3000000;
 
 -- 2. UNION ALL
-
+-- (1) 부서 코드가 D5인 사원들
 SELECT emp_id, emp_name, dept_code, salary
 FROM employee
 WHERE dept_code = 'D5'
@@ -111,4 +111,3 @@ UNION ALL
 SELECT emp_id, emp_name, dept_code, salary
 FROM employee
 WHERE salary > 3000000;
---
