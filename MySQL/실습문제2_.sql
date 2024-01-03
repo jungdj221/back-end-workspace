@@ -46,7 +46,13 @@ JOIN
 JOIN rental USING (customer_id)
 ;
 -- 5. 이메일이 JOYCE.EDWARDS@sakilacustomer.org인 고객이 가장 최근에 빌린 영화 제목과 영화 내용을 조회 
-
+SELECT title, description, rental_date
+FROM film
+JOIN inventory USING (film_id)
+JOIN rental USING (inventory_id)
+JOIN customer USING (customer_id)
+WHERE email = 'JOYCE.EDWARDS@sakilacustomer.org'
+ORDER BY rental_date DESC;
 
 
 
