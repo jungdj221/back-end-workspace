@@ -25,6 +25,8 @@
 		4. DDL(Data Definition Language : 데이터 정의어)
 			- DMS의 구조를 정의하거나 변경, 삭제하기 위해 사용하는 언어
               (create : 생성,Alter : 수정,Drop : 삭제) - 테이블 변경과 관련
+		5. TCL(Transaction Control Language) : 트랜젝션을 제어하는 언어
+			  (COMIT : 실행, ROLLBACK : 취소)
 */
 /*
 	 SELECT 컬럼, [컬럼, ....]
