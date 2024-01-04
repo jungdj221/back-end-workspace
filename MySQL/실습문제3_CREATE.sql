@@ -163,4 +163,3 @@ JOIN tb_book ON (rent_book_no = bk_no)
 JOIN tb_publisher ON(bk_pub_no=pub_no )
 WHERE member_no=1;
 
-
