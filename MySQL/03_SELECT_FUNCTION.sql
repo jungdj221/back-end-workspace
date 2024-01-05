@@ -462,4 +462,3 @@ SELECT count(*)
 FROM employee
 WHERE ent_yn= 'y';
 
-
