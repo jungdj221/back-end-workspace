@@ -1,3 +1,8 @@
+DROP TABLE tb_publisher;
+DROP TABLE tb_book;
+DROP TABLE tb_member;
+DROP TABLE tb_member;
+
 -- 실습 문제
 -- 도서관리 프로그램을 만들기 위한 테이블 만들기
 
@@ -12,7 +17,10 @@
 -- 	pub_no INT AUTO_INCREMENT PRIMARY KEY,
 --     pub_name VARCHAR(20) NOT NULL,
 --     phone VARCHAR(20),
--- );
+-- ) 
+-- INSERT INTO tb_publisher(pub_name, phone) VALUES('천그루숲', '010-8748-0784');
+-- INSERT INTO tb_publisher(pub_name, phone) VALUES('골든레빗', '0505-398-0505');
+-- INSERT INTO tb_publisher(pub_name, phone) VALUES('윌북', '031-955-3777');
 
 CREATE TABLE tb_publisher(
 	pub_no INT PRIMARY KEY,
@@ -42,6 +50,11 @@ SELECT * FROM tb_publisher;
 --     pub_no INT, -- pub_no로 바꾸면 쉬워짐
 --     FOREIGN KEY (bk_pub_no) 
 -- );
+-- INSERT INTO tb_book(bk_no, bk_title, bk_author, bk_price, bk_pub_no) VALUES ('오늘부터 개발자', '김병욱', 16800, 1);
+-- INSERT INTO tb_book(bk_no, bk_title, bk_author, bk_price, bk_pub_no) VALUES ('요즘 우아한 개발', '우아한 형제들', 24000, 2);
+-- INSERT INTO tb_book(bk_no, bk_title, bk_author, bk_price, bk_pub_no) VALUES ('코딩 좀 아는 사람', '제러미 키신', 17800, 3);
+-- INSERT INTO tb_book(bk_no, bk_title, bk_author, bk_price, bk_pub_no) VALUES ('코딩 좀 아는 사람', '제러미 키신', 17800, 3);
+-- INSERT INTO tb_book(bk_no, bk_title, bk_author, bk_price, bk_pub_no) VALUES ('그렇게 쓰면 아무도 안 읽습니다', '전주경', 19800, 3);
 
 DROP TABLE tb_book;
 CREATE TABLE tb_book(
@@ -52,6 +65,7 @@ CREATE TABLE tb_book(
     bk_pub_no INT,
     FOREIGN KEY (bk_pub_no) REFERENCES tb_publisher(pub_no) ON DELETE CASCADE
 );
+
 INSERT INTO tb_book VALUES(1, '오늘부터 개발자', '김병욱', 16800, 1);
 INSERT INTO tb_book VALUES(2, '요즘 우아한 개발', '우아한 형제들', 24000, 2);
 INSERT INTO tb_book VALUES(3, '프로덕트 매니저 원칙', '장홍석', 22000, 2);
@@ -82,6 +96,12 @@ SELECT * FROM tb_book;
 --     status VARCHAR(1) DEFAULT 'N' CHECK (status IN ('Y','N')),
 --     enroll_date DATE DEFAULT (current_date())
 -- );
+-- INSERT INTO tb_member(member_id, member_pwd, member_name, gender, address, phone, status, enroll_date) 
+-- VALUES('user01','pass01', '홍길동', 'M', '서울시 강서구', '010-1111-2222');
+-- INSERT INTO tb_member(member_id, member_pwd, member_name, gender, address, phone, status, enroll_date) 
+-- VALUES('user02','pass02', '김말똥', 'M', '서울시 강남구', '010-3333-4444');
+-- INSERT INTO tb_member(member_id, member_pwd, member_name, gender, address, phone, status, enroll_date) 
+-- VALUES('user03','pass03', '강길순', 'F', '서울시 광주구', '010-4444-5555');
 
 DROP TABLE tb_member;
 CREATE TABLE tb_member(
@@ -118,7 +138,7 @@ SELECT * FROM tb_member;
 -- );
 
 CREATE TABLE tb_rent(
-	rent_no INT PRIMARY KEY,
+	rent_no INT AUTO_INCREMENT PRIMARY KEY,
     rent_mem_no INT,
     rent_book_no INT,
     rent_date DATE DEFAULT (current_date()),
@@ -126,11 +146,19 @@ CREATE TABLE tb_rent(
 	FOREIGN KEY (rent_book_no) REFERENCES tb_book(bk_no) ON DELETE SET NULL
 
 );
-INSERT INTO tb_rent VALUES(1, 1, 2, default);
-INSERT INTO tb_rent VALUES(2, 1, 3, default);
-INSERT INTO tb_rent VALUES(3, 2, 1, default);
-INSERT INTO tb_rent VALUES(4, 2, 2, default);
-INSERT INTO tb_rent VALUES(5, 1, 5, default);
+-- ALTER로 FOREIGN KEY만 관리
+ ALTER TABLE tb_book ADD CONSTRAINT pub_no_fk
+ 	FOREIGN KEY (pub_no) REFERENCES tb_publisher(pub_no);
+ ALTER TABLE tb_rent ADD CONSTRAINT member_no_fk 
+ 	FOREIGN kEY(member_no) REFERENCES tb_member(member_No);
+ ALTER TABLE tb_rent ADD CONSTRAINT bk_no_fk
+ 	FOREIGN KEY(bk_no) REFERENCES tb_book(bk_no);
+    
+INSERT INTO tb_rent(member_no, bk_no) VALUES( 1, 2);
+INSERT INTO tb_rent(member_no, bk_no) VALUES( 1, 3);
+INSERT INTO tb_rent(member_no, bk_no) VALUES( 2, 1);
+INSERT INTO tb_rent(member_no, bk_no) VALUES( 2, 2);
+INSERT INTO tb_ren(member_no, bk_no) VALUES( 1, 5);
 SELECT * FROM tb_rent;
 
 -- 5. 2번 도서를 대여한 회원의 이름, 아이디, 대여일, 반납 예정일(대여일 + 7일)을 조회하시오.
@@ -141,7 +169,7 @@ SELECT * FROM tb_rent;
 -- WHERE bk_no = 2;
 -- SELECT * FROM tb_rent_check;
 
-SELECT distinct member_name, member_id, rent_date, adddate(rent_date, interval 7 day)
+SELECT distinct member_name '회원이름', member_id '아아디', rent_date '대여일', adddate(rent_date, interval 7 day) '반납예정일'
 FROM  tb_rent
 JOIN tb_member ON (rent_mem_no = member_no)
 JOIN tb_book ON (rent_book_no = bk_no)
@@ -156,9 +184,9 @@ WHERE rent_book_no =2 OR bk_no =2;
 -- WHERE member_no=1;
 -- SELECT * FROM tb_rent_check2;
 
-SELECT bk_title, pub_name, rent_date, adddate(rent_date, interval 7 day)
+SELECT bk_title '도서명', pub_name '출판사명', rent_date '대여일', adddate(rent_date, interval 7 day) '반납예정일'
 FROM tb_rent
-JOIN tb_member ON (rent_mem_no = member_no)
+ JOIN tb_member ON (rent_mem_no = member_no)
 JOIN tb_book ON (rent_book_no = bk_no)
 JOIN tb_publisher ON(bk_pub_no=pub_no )
 WHERE member_no=1;
