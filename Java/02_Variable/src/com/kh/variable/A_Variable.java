@@ -13,7 +13,8 @@ public class A_Variable {
 
 		// 생성한 클래스로 메소드 실행(호출)
 //		variable.printValue();
-		variable.variableTest();
+		//variable.variableTest();
+		variable.constant();
 	}
 
 	public void printValue() {
@@ -42,6 +43,7 @@ public class A_Variable {
 		 **/
 
 		// 기본 자료형(Primitive type) : 실제 값을 저장
+		// 스택 메모리에 생성된 공간에 실제 변수값이 저장
 		// 1. 논리형 : 1byte(=8bit)
 		boolean isTrue; // 변수선언
 		isTrue = true; // 변수 초기화
@@ -67,6 +69,63 @@ public class A_Variable {
 		float fNum = 1.2F; // 4byte - 숫자 뒤에 f or F 붙여야함
 		double dNum = 1.2; // 8byte (기본)
 		System.out.println(fNum);
+		
+		// * 참조 자료형 : 4byte, 기본형을 제외한 나머지 (클래스) - 주소 값을 저장 / 실제값은 heap에 저장
+		// 실제 데이터 값은 힙 메모리에 저장하고, 스택 메모리의 변수 공간에는 실제 변수값이 저장된 힙 메모리의 위치값을 저장
+		String name = "이상현";
+		String name2 = new String("이상현");
+		System.out.println(name2);
+		
+		// 변수의 네이밍 규칙
+		// 1. 대소문자 구분.
+		int number; 
+		// String number; 자료형이 달라도 변수명이 같으면 에러 발생 
+		int NUMBER;
+		int Number;
+		
+		// 2. 숫자로 시작하면 안됨.
+		// int 1age;
+		int a2g3e4;
+		
+		// 3. 특수 문자는 '_' '$'만 사용이 가능
+		int _age;
+		int a_g_e;
+		int age$;
+		// int %age; 에러
+		
+		// 4. 예약어(Reserved word)사용 하면 안됨
+		//int public;
+		//int void;
+		//int int;
+		//int class;
+		
+		// 5. 권장사항 낙타표기법(camael_case)
+		// 첫 글자는 항상 소문자, 여러 단어가 오면 대문자 구분
+		int maxnumber;
+		int max_number; // 자바에서 x
+		int MaxNumber;
 		}
+	
+		public void constant() {
+			/*
+			 * 상수
+			 * 
+			 * final 자료형 변수명;
+			 *
+			 * - 변하지 않는 값으로 특정 변수의 값이 변경되는 걸 원하지 않을때
+			 * - 초기화 이후에는 값을 변경할 수 없다.
+			 * */
+			int age = 20;
+			age = 25;
+			System.out.println(age);
+			
+			final int AGE = 30; // const 처리 됨
+			//AGE = 35;
+			System.out.println(AGE);
+			
+			
+		}
+	
+		
 
 }
