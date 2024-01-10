@@ -7,14 +7,13 @@ public class VariablePractice {
 	public static void main(String[] args) {
 		VariablePractice v = new VariablePractice();
 		v.method1();
-		
-		VariablePractice v2 = new VariablePractice();
-		v2.method2();
-		
-		Scanner sc = new Scanner(System.in);
-		sc.method3();
-
+		v.method2();
+		v.method3();
+				
 	}
+	
+	Scanner sc = new Scanner(System.in);
+	
 	public void method1() {
 		System.out.println("-1번----------------------------");
 		int AdultPrice = 10000;
@@ -30,8 +29,8 @@ public class VariablePractice {
 		int y = 7;
 		int z = 9;
 		final int xOrignal = 5;
-		final int yOriginal = 7;
-		final int zOriginal = 9;
+		//final int yOriginal = 7;
+		//final int zOriginal = 9;
 		x = y;
 		y = z;
 		z = xOrignal; // 맨 처음 x는 y값(7)로 치환됐으므로
@@ -42,7 +41,9 @@ public class VariablePractice {
 		System.out.println("-------------------------------");
 	}
 	public void method3() {
-		System.out.print("문자열을 입력하세요");
+		
+		System.out.print("문자열을 입력하세요 : ");
 		String word = sc.nextLine();
+		
 	}
 }
