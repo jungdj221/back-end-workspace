@@ -4,6 +4,8 @@ package com.kh.practice;
 import java.util.Scanner;
 public class VariablePractice {
 	
+	Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		VariablePractice v = new VariablePractice();
 		v.method1();
@@ -12,8 +14,7 @@ public class VariablePractice {
 				
 	}
 	
-	Scanner sc = new Scanner(System.in);
-	
+
 	public void method1() {
 		System.out.println("-1번----------------------------");
 		int AdultPrice = 10000;
@@ -41,9 +42,11 @@ public class VariablePractice {
 		System.out.println("-------------------------------");
 	}
 	public void method3() {
-		
+		System.out.println("-2번----------------------------");
 		System.out.print("문자열을 입력하세요 : ");
 		String word = sc.nextLine();
-		
+		System.out.println("첫번째 문자 : " + word.charAt(0));
+		System.out.println("마지막 문자 : " + word.charAt(word.length()-1));
+		System.out.println("-------------------------------");
 	}
 }
