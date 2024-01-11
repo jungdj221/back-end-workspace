@@ -9,10 +9,10 @@ public class OperatorPractice {
 	public static void main(String[] args) {
 		OperatorPractice o = new OperatorPractice();
 		//o.method1();
-		o.method2();
+		//o.method2();
 		//o.method3();
 		//o.method4();
-		//o.method5();
+		o.method5();
 		//o.method6();
 				
 	}
@@ -54,7 +54,9 @@ public class OperatorPractice {
 		System.out.print("값 3 >");
 		int num3 = sc.nextInt();
 		
-		String result = num1 == num2 && num2 == num3 ? "true" : "false";
+		boolean result = num1 == num2 && num2 == num3;
+		
+		//String result = num1 == num2 && num2 == num3 ? "true" : "false";
 		System.out.println(result);
 		
 	}
@@ -72,7 +74,7 @@ public class OperatorPractice {
 	public void method5() {
 		System.out.print("나이를 입력해주세요 : ");
 		int age = sc.nextInt();
-		String result = 1 < age && age <=13 ? "어린이입니다." : 13 < age && age <=19 ? "청소년입니다." : "성인입니다.";
+		String result = 1 < age && age <=13 ? "어린이입니다." : /*13 < age &&*/ age <=19 ? "청소년입니다." : "성인입니다.";
 		System.out.println(result);
 		
 	}
