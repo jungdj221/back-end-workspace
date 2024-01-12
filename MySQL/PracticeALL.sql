@@ -29,3 +29,17 @@ LIMIT 10;
 SELECT concat(last_name,' ' ,first_name) 이름, char_length(concat(last_name,first_name)) 글자수
 FROM actor
 WHERE last_name LIKE 'J%';
+
+SELECT dept_code, count(*), sum(ifnull(salary,0)), avg(ifnull(salary,0))
+FROM employee
+GROUP BY dept_code
+HAVING dept_code = 'D9';
+
+
+
+
+
+
+
+
+

@@ -10,11 +10,10 @@ public class ConditionPractice {
 		//c.practice1();
 		//c.practice2();
 		//c.practice3();
-		c.practice4();
+		//c.practice4();
 		//c.practice5();
 		//c.practice6();
-		//c.practice7();
-		//c.practice7();
+		c.practice7();
 		//c.practice8();
 		//c.practice9();
 		//c.practice10();
@@ -129,7 +128,15 @@ public class ConditionPractice {
         464,000
      */
     public void practice5() {
-    	
+    	System.out.print("구매할 옷의 가격을 입력해주세요 : ");
+    	int price = Integer.parseInt(sc.nextLine());
+    	if(price >= 500000) {
+    		System.out.println(price*0.8);
+    	} else if(price >= 300000) {
+    		System.out.println(price*0.9);
+    	} else{
+    		System.out.println(Math.round(price*0.95));
+    	}
     }
 
 
@@ -138,7 +145,20 @@ public class ConditionPractice {
         입력받은 각에 따라 예각일 때 1, 직각일 때 2, 둔각일 때 3, 평각일 때 4를 출력하세요.
      */
     public void practice6() {
+    	System.out.print("각도를 입력하세요 : ");
+    	int angle = Integer.parseInt(sc.nextLine());
     	
+    	if(0 < angle && angle < 90) {
+    		System.out.println('1');
+    	} else if (angle == 90) {
+    		System.out.println('2');
+    	} else if (90 < angle && angle < 180) {
+    		System.out.println('3');
+    	} else if (angle == 180) {
+    		System.out.println('4');
+    	} else {
+    		System.out.println("입력받은 각도가 180도가 넘습니다");
+    	}
     }
 
 
@@ -162,7 +182,10 @@ public class ConditionPractice {
           아이디가 틀렸습니다.
     */
     public void practice7() {
-    	
+    	System.out.print("아이디 : ");
+    	String id = sc.nextLine();
+    	System.out.println("비밀번호 : ");
+    	String pwd = sc.nextLine();
     }
 
     /*
