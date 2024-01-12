@@ -186,6 +186,8 @@ public class ConditionPractice {
     	String id = sc.nextLine();
     	System.out.println("비밀번호 : ");
     	String pwd = sc.nextLine();
+    	
+    	if()
     }
 
     /*
