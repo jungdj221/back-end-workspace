@@ -39,7 +39,7 @@ public class OperatorPractice {
 			int result = (numb/100)*100;
 			System.out.println(result);
 		} else {
-			System.out.println("도출값 : 0, 입력한 값이 100이하의 수 입니다.");
+			System.out.println("도출값 : 0, 입력한 값이 100보다 작은수 입니다.");
 		}
 		
 		
@@ -87,6 +87,7 @@ public class OperatorPractice {
 		System.out.println("바구니 하나에 몇개의 사과가 들어갈 수 있나요? : ");
 		int pocket = sc.nextInt();
 		int PocketNum = apple % pocket == 0 ? apple / pocket : (apple / pocket)+1;
+		System.out.println(apple / PocketNum + (apple % PocketNum == 0 ? 0 : 1));
 		System.out.println(PocketNum + "개 의 바구니가 필요합니다.");
 		
 	}
