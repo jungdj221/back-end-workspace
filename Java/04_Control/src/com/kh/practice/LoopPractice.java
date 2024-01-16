@@ -10,8 +10,8 @@ class LoopPractice {
 		//l.method2();
 		//l.method3();
 		//l.method4();
-		//l.method5();
-		l.method6();
+		l.method5();
+		//l.method6();
 	}
 	
 	Scanner sc = new Scanner(System.in);
@@ -25,19 +25,39 @@ class LoopPractice {
         1
      */
     public void method1() {
-    	int random = (int)(Math.random()*100)+1;
-    	
-    	for(int i = random; i > 0; i--) {
+    	System.out.print("숫자 입력 : ");
+    	int num = sc.nextInt();
+    	for(int i = num; i > 0; i--) {
     		System.out.println(i);
     	}
     }
 
     // 2. 1+(-2)+3+(-4)+...과 같은 식으로 계속 더해나갔을 때, 몇까지 더해야 총합이 100 이상 되는지 출력하시오.
     public void method2() {
-    	// 홀수
+
     	int sumOdd = 0;
+    	int oddCount = 0;
     	int sumEven = 0;
-    	int total = sumOdd + sumEven;
+    	int evenCount = 0;
+    	
+    	int number =1;
+    	
+    	while(true) {
+    		number++;
+    		if(number % 2 == 0) {
+    			sumEven += number;
+    			evenCount++;
+    		} else {
+    			sumOdd += -number;
+    			oddCount++;
+    		}
+    		
+    		if(sumEven + sumOdd >= 100) {
+    			System.out.println(evenCount + oddCount);
+    			break;
+    		}
+    	}
+    	
     	
     	
     	
@@ -78,13 +98,14 @@ class LoopPractice {
         0
      */
     public void method4() {
-    	int random = (int)(Math.random()*10);
-    	int count = 0;
-    	for(int i = 0; i <= random;i++) {
+    	 // 0.0 * 10 <= Math.random() < 1.0 * 11
+    	 //  0.0 <= Math.random() < 11.0
+    	while(true) {
+    		int random = (int)(Math.random()*11);
     		if(random == 0) break;
-    		else count++;
+    		System.out.println(random);
     	}
-    	System.out.println(count);
+    	
     }
 
     /*
@@ -99,7 +120,7 @@ class LoopPractice {
 
      */
     public void method5() {
-    	int random = (int)(Math.random()*6)+1;
+    	
     	int count1 =0;
     	int count2 =0;
     	int count3 =0;
@@ -108,12 +129,25 @@ class LoopPractice {
     	int count6 =0;
     	for(int i =1; i <=10; i++) {
     		//랜덤값 10번 생성하기
-    		if(random == 1) count1++;
-    		else if(random == 2) count2++;
-    		else if(random == 3) count3++;
-    		else if(random == 4) count4++;
-    		else if(random == 5) count5++;
-    		else if(random == 6) count6++;
+    		int random = (int)(Math.random()*7);
+    		if(random == 1) {
+    			++count1;
+    		}
+    		else if(random == 2) {
+    			++count2;
+    		}
+    		else if(random == 3) {
+    			++count3;
+    		}
+    		else if(random == 4) {
+    			++count4;
+    		}
+    		else if(random == 5) {
+    			++count5;
+    		}
+    		else if(random == 6) {
+    			++count6;
+    		}
     	}
     	System.out.println("1 : " + count1);
     	System.out.println("2 : " + count2);

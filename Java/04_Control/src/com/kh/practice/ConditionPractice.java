@@ -13,10 +13,10 @@ public class ConditionPractice {
 		//c.practice4();
 		//c.practice5();
 		//c.practice6();
-		c.practice7();
+		//c.practice7();
 		//c.practice8();
-		//c.practice9();
-		//c.practice10();
+		//c.practice9(); 다시하기
+		c.practice10();
 		//c.practice11();
 
 	}
@@ -184,10 +184,18 @@ public class ConditionPractice {
     public void practice7() {
     	System.out.print("아이디 : ");
     	String id = sc.nextLine();
-    	System.out.println("비밀번호 : ");
+    	System.out.print("비밀번호 : ");
     	String pwd = sc.nextLine();
     	
-    	if()
+    	if(id.equals("happy") && pwd.equals("1234")) {
+    		System.out.println("아이디 : " + id);
+    		System.out.println("비밀번호 : " + pwd);
+    		System.out.println("로그인 성공");
+    	}else {
+    		System.out.println("아이디 : " + id);
+    		System.out.println("비밀번호 : " + pwd);
+    		System.out.println("틀렸습니다");
+    	}
     }
 
     /*
@@ -204,7 +212,18 @@ public class ConditionPractice {
 
      */
     public void practice8() {
+       System.out.print("키를 입력하세요 : ");
+       double height = sc.nextDouble();
+       System.out.print("몸무게를 입력하세요 : ");
+       double weight = sc.nextDouble();
+       double bmi = weight / ((height/100) * (height/100));
+       System.out.println("BMI 지수 : " + bmi);
        
+       if(bmi >30)System.out.println("고도비만");
+       else if(bmi >= 25) System.out.println("비만");
+       else if(bmi >= 23) System.out.println("과체중");
+       else if(bmi >=18.5) System.out.println("정상체중");
+       else System.out.println("저체중");
     }
 
     /*
@@ -218,6 +237,14 @@ public class ConditionPractice {
 
      */
     public void practice9() {
+    	System.out.print("숫자입력 : ");
+    	int num1 = sc.nextInt();
+    	System.out.print("숫자입력 : ");
+    	int num2 = sc.nextInt();
+    	System.out.println("연산자입력 : ");
+    	char opr = sc.next().charAt(0);
+    	if(num1 <=0 || num2 <=0 || opr.equals(""))
+    	System.out.printf("%d %c %d = %d", num1, opr, num2, num1 + opr + num2 );
     	
     }
 
@@ -233,7 +260,9 @@ public class ConditionPractice {
         조회 메뉴입니다.
      */
     public void practice10() {
-    	
+    	while(true) {
+    		
+    	}
     }
 
     /*
