@@ -10,8 +10,8 @@ class LoopPractice {
 		//l.method2();
 		//l.method3();
 		//l.method4();
-		l.method5();
-		//l.method6();
+		//l.method5();
+		l.method6();
 	}
 	
 	Scanner sc = new Scanner(System.in);
@@ -34,18 +34,12 @@ class LoopPractice {
 
     // 2. 1+(-2)+3+(-4)+...과 같은 식으로 계속 더해나갔을 때, 몇까지 더해야 총합이 100 이상 되는지 출력하시오.
     public void method2() {
-    	int sum = 0;
-    	for(int i=1; i<500; i++) {
-    		if(i % 2 == 0) {
-    			i = -i;
-    		} else {
-    			i=i;
-    		}
-    		i++;
-    		sum += i;
-    		if(sum >=100) break;
-    		System.out.println(i);
-    	}
+    	// 홀수
+    	int sumOdd = 0;
+    	int sumEven = 0;
+    	int total = sumOdd + sumEven;
+    	
+    	
     	
     }
 
@@ -113,6 +107,7 @@ class LoopPractice {
     	int count5 =0;
     	int count6 =0;
     	for(int i =1; i <=10; i++) {
+    		//랜덤값 10번 생성하기
     		if(random == 1) count1++;
     		else if(random == 2) count2++;
     		else if(random == 3) count3++;
@@ -151,7 +146,62 @@ class LoopPractice {
         이겼습니다 !
     */
     public void method6() {
-
+    	System.out.print("당신의 이름을 입력해주세요 : ");
+    	String name = sc.nextLine();
+    	int random = (int)(Math.random()*3)+1;
+    	int countloose =0;
+    	int countWin =0;
+    	int countsame =0;
+    	
+    	while(true) {
+    		System.out.print("가위바위보 : ");
+    		String play = sc.nextLine();
+    		if(random == 1) {
+    			System.out.println("컴퓨터 : 가위");
+    			System.out.println(name + ": " + play);
+    			if(play.equals("가위")) {
+    			System.out.println("비겼습니다");
+    			countsame++;
+    			}else if(play.equals("바위")) {
+    				System.out.println("이겼습니다.");
+    				countWin++;
+    				break;
+    			}else {
+    				System.out.println("졌습니다");
+    				countloose++;
+    			}
+    		}else if(random == 2) {
+    			System.out.println("컴퓨터 : 바위");
+    			System.out.println(name + ": " + play);
+    			if(play.equals("가위")) {
+        			System.out.println("졌습니다");
+        			countloose++;
+        			
+        			}else if(play.equals("바위")) {
+        				System.out.println("비겼습니다.");
+        				countsame++;
+        			}else {
+        				System.out.println("이겼습니다");
+        				countWin++;
+        				break;
+        			}
+    		}else if(random == 3) {
+    			System.out.println("컴퓨터 : 보");
+    			System.out.println(name + ": " + play);
+    			if(play.equals("가위")) {
+        			System.out.println("이겼습니다");
+        			countWin++;
+        			break;
+        			}else if(play.equals("바위")) {
+        				System.out.println("졌습니다.");
+        				countloose++;
+        			}else {
+        				System.out.println("비겼습니다");
+        				countsame++;
+        			}
+    		}
+    	}
+    	System.out.println(countWin + "번 이기고"+ countsame +"번 비기고"+ countloose + " 번 짐");
     }
 
 }
