@@ -1,13 +1,32 @@
 package com.kh.Practice;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class ArrayPractice {
-	
+
+	public static void main(String[] args) {
+		ArrayPractice a = new ArrayPractice();
+		//a.method1();
+		a.method2();
+		//a.method3();
+		//a.method4();
+		//a.method5();
+	}
 	/*
 	 * 길이가 5인 배열을 선언하고 과일 5개로 초기화 한 후 본인이 좋아하는 과일 하나를 출력하세요. (과일 5개는 뭐든지~)
 	 * 
 	 * */
 	public void method1() {
+		String[] fruit = new String[5];
 		
+		fruit[0] = "사과";
+		fruit[1] = "딸기";
+		fruit[2] = "용과";
+		fruit[3] = "복숭아";
+		fruit[4] = "바나나";
+		
+		System.out.println(fruit[2]);
 	}
 	
 	/*
@@ -24,7 +43,13 @@ public class ArrayPractice {
 	 * 2
 	 * */
 	public void method2() {
-		
+		System.out.print("정수 : ");
+		int num1 = sc.nextInt();
+		for(int i = 0; i < num1; i++) {
+			System.out.print("배열 " + i + "번째 인덱스에 넣을 값 : ");
+			int num2 = sc.nextInt();
+		}
+		System.out.println(Arrays.toString(null));
 	}
 	
 	
@@ -60,5 +85,5 @@ public class ArrayPractice {
 	public void method5() {
 		
 	}
-	
+	Scanner sc = new Scanner(System.in);
 }
