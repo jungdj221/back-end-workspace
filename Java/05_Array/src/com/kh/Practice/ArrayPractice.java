@@ -1,6 +1,7 @@
 package com.kh.Practice;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class ArrayPractice {
@@ -8,10 +9,10 @@ public class ArrayPractice {
 	public static void main(String[] args) {
 		ArrayPractice a = new ArrayPractice();
 		//a.method1();
-		a.method2();
+		//a.method2();
 		//a.method3();
-		//a.method4();
-		//a.method5();
+		//a.method4(); 다시하기
+		a.method5();
 	}
 	/*
 	 * 길이가 5인 배열을 선언하고 과일 5개로 초기화 한 후 본인이 좋아하는 과일 하나를 출력하세요. (과일 5개는 뭐든지~)
@@ -45,11 +46,12 @@ public class ArrayPractice {
 	public void method2() {
 		System.out.print("정수 : ");
 		int num1 = sc.nextInt();
+		int[] arr = new int[num1];
 		for(int i = 0; i < num1; i++) {
 			System.out.print("배열 " + i + "번째 인덱스에 넣을 값 : ");
-			int num2 = sc.nextInt();
+			arr[i] = sc.nextInt();
 		}
-		System.out.println(Arrays.toString(null));
+		System.out.println(Arrays.toString(arr));
 	}
 	
 	
@@ -59,6 +61,15 @@ public class ArrayPractice {
 	 * 
 	 * */
 	public void method3() {
+		String[] uberMenu = {"순대국밥", "쌀국수", "돈까스", "짜장면", "설렁탕"};
+		System.out.print("배달 시킬 메뉴 : ");
+		String menu = sc.nextLine();
+		if(menu.equals(uberMenu[0]) ||menu.equals(uberMenu[1])
+		 ||menu.equals(uberMenu[2])||menu.equals(uberMenu[3])
+		 ||menu.equals(uberMenu[4])) {
+			System.out.println("배달가능");
+		}
+		else System.out.println("배달불가능");
 		
 	}
 	
@@ -72,6 +83,24 @@ public class ArrayPractice {
 	 * 
 	 * */
 	public void method4() {
+		System.out.print("주민등록번호를 입력하세요 : ");
+		String num = sc.nextLine();
+		char[] pinNum = new char[num.length()];
+		for(int i = 0; i <14; i++) {
+			if(i<=8) {
+				pinNum[i] = num.charAt(i);
+				} // 여기까지가 주민등록번호 배열이 등록하기
+			}
+		//copy배열
+		char[] copy = new char[pinNum.length];
+			for(int i = 0; i < pinNum.length; i++) {
+				if(i<=7) {
+					copy[i] = pinNum[i];
+				}else {
+					copy[i] = "*";
+				}
+		}
+		
 		
 	}
 	
@@ -83,7 +112,10 @@ public class ArrayPractice {
 	 * 
 	 * */
 	public void method5() {
-		
+		System.out.print("단어 입력 : ");
+		String[] reverse = sc.nextLine();
+		Arrays.sort(reverse, Collections.reverseOrder());
+		System.out.println(Arrays.toString(reverse));
 	}
 	Scanner sc = new Scanner(System.in);
 }
