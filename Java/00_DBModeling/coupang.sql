@@ -10,7 +10,7 @@ CREATE TABLE product(
     prod_name VARCHAR(30) NOT NULL, -- 상품명 
     prod_desc TEXT, -- 상품 설명 
     price INT NOT NULL, -- 가격 
-    stock INT NOT NUll, -- 재고수량
+    stock INT NOT NULL, -- 재고수량
     prod_date DATE DEFAULT(current_date) -- 상품등록일
 ); -- 상품
 CREATE TABLE enterprise(
