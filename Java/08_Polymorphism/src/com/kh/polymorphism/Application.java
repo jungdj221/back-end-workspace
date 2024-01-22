@@ -1,5 +1,8 @@
 package com.kh.polymorphism;
 
+import java.util.Scanner;
+
+import com.kh.polymorphism.controller.EmployeeController;
 import com.kh.polymorphism.model.child.Engineer;
 import com.kh.polymorphism.model.child.Manager;
 import com.kh.polymorphism.model.child.Secretary;
@@ -12,10 +15,10 @@ import com.kh.polymorphism.model.parent.Employee;
  * */
 
 public class Application {
-
+	
+	
+	
 	public static void main(String[] args) {
-
-		
 		Employee e1 = new Employee("이수근", 12000);
 		Engineer eg1 = new Engineer("김영철", 56000, "Java", 200);
 		Manager m1 = new Manager("강호동", 23000, "기획팀");
@@ -36,8 +39,30 @@ public class Application {
 		System.out.println(eg2);
 		System.out.println(m2);
 		System.out.println(s2);
-		
+		System.out.println();
 		// 다형성 + 객체 배열
+		Employee[] empArr = {e1, eg2, m2, s2};
+		
+		
+		
+		EmployeeController ec = new EmployeeController();
+		Scanner sc = new Scanner(System.in);
+		// 이름으로 사람 찾기
+		System.out.print("이름입력 : ");
+		String name = sc.nextLine();
+		Employee result = ec.findEmployeeByName(name, empArr);
+		if(result!=null) {
+			System.out.println(result);
+		}else {
+			System.out.println("찾는 사람이 없습니다.");
+		}
+		
+		//찾은사람의 연봉
+		System.out.println(result.getName() + "의 연봉은"+ ec.getAnnualSalary(result));
+		
+		//전체 사람들의 연봉 총합은?
+		//int sumSalary = // 각 사람당의 연봉 더하기
+		 System.out.println("전체 사람들의 연봉 총합은 " + ec.getAllSalary(empArr));
 	}
-
+	
 }
