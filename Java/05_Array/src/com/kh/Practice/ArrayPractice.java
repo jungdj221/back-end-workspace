@@ -6,12 +6,14 @@ import java.util.Scanner;
 
 public class ArrayPractice {
 
+	Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		ArrayPractice a = new ArrayPractice();
 		//a.method1();
 		//a.method2();
 		//a.method3();
-		//a.method4(); 다시하기
+		//a.method4(); 
 		a.method5();
 	}
 	/*
@@ -97,10 +99,11 @@ public class ArrayPractice {
 				if(i<=7) {
 					copy[i] = pinNum[i];
 				}else {
-					copy[i] = "*";
+					copy[i] = '*';
 				}
+				
 		}
-		
+			System.out.println(copy);
 		
 	}
 	
@@ -113,9 +116,11 @@ public class ArrayPractice {
 	 * */
 	public void method5() {
 		System.out.print("단어 입력 : ");
-		String[] reverse = sc.nextLine();
-		Arrays.sort(reverse, Collections.reverseOrder());
-		System.out.println(Arrays.toString(reverse));
+		String word = sc.next();
+		char[] reverse = word.toCharArray();
+		for(int i = word.length()-1; i >= 0; i--) {
+			System.out.println(reverse[i]);
+		}
 	}
-	Scanner sc = new Scanner(System.in);
+
 }

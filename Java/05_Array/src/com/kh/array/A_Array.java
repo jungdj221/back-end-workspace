@@ -83,7 +83,6 @@ public class A_Array {
 	// 1. 얕은 복사 : 배열의 주소만 복사
 	// 2. 깊은 복사 : 동일한 새로운 뱅ㄹ을 하나 생성해서 내부 값들도 함께 복사
 	public void method4() {
-		
 		int[] number = {1, 2, 3, 4, 5};
 		int[] copy = number;
 		System.out.println(number);
