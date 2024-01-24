@@ -14,8 +14,12 @@ public class Application {
 	public static void main(String[] args) {
 		Application app = new Application();
 		app.mainMenu();
+		
 	}
-
+	
+	public void test() {
+		
+	}
 	public void mainMenu() {
 		System.out.print("이름 : ");
 		String name = sc.nextLine();
@@ -50,6 +54,6 @@ public class Application {
 	}
 	
 	public void getBook() {
-		for(n)
+		
 	}
 }

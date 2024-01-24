@@ -3,20 +3,28 @@ package com.kh.re_doit;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import com.kh.re_doit.model.Book;
+import com.kh.re_doit.model.Member;
+
 public class Application {
 
 	Scanner sc = new Scanner(System.in);
-	
-	// 한 사람에 대한 변수
-	String name = "";
-	int age = 0;
-	int coupon = 0;
-	String[] bookList = new String[3];
-	
+	Member member = new Member();
+
 	int num = -1;
 	
-	
+	// 책에대한 정보는 처음부터 필요함
+	Book[] books = {
+			new Book("맛있는 지중해식 레시피", true),
+			new Book("카페 샌드위치 마스터 클래스", false),
+			new Book("원피스 107", 19),
+			new Book("주술회전 24", 15)
+	};
+			
 	public static void main(String[] args) {
+		
+		
+		
 		Application app = new Application();
 		app.mainMenu();
 		
@@ -25,10 +33,10 @@ public class Application {
 		
 		
 		System.out.print("이름 : ");
-		name = sc.nextLine();
+		member.setName(sc.nextLine()); // setter
 		
 		System.out.print("나이 : ");
-		age = Integer.parseInt(sc.nextLine());
+		member.setAge(Integer.parseInt(sc.nextLine())); // setter
 		
 		/*
 		 * for : 정해진 범위가 있을때
@@ -61,39 +69,57 @@ public class Application {
 	}
 	
 	public void myPage() {
-		System.out.println("Member[name=" + name + ", age=" + age + ", cookCoupon= " + coupon + ", booList= " + Arrays.toString(bookList));
+		System.out.println(member); // member.toString() // toString()은 생략해도 상관없음
 	}
 	
 	public void rentBook() {
-		System.out.println("0번 도서 : Book [title=맛있는 지중해식 레시피] / CookBook [coupon=true]");
-		System.out.println("1번 도서 : Book [title=카페 샌드위치 마스터 클래스] / CookBook [coupon=false]");
-		System.out.println("2번 도서 : Book [title=원피스 107] / AniBook [accessAge=19]");
-		System.out.println("3번 도서 : Book [title=주술회전 24] / AniBook [accessAge=15]");
+		for(int i = 0; i < books.length; i++) {
+			System.out.println(i + "번 도서 : " + books[i]);
+		} // toString을 지정해줘야함.
 		System.out.print("대여할 도서 번호 선택 : ");
 		num = Integer.parseInt(sc.nextLine());
-		for(int i =0; i < bookList.length; i++) {
-			System.out.println(bookList[i]);
-			if(bookList[i]==null) {
+		
+		Book selectBook = books[num]; // 사용자가 선택한 책 -> 대여할 도서 책
+		
+		// getter 를 이영해서 기존 책 리스트를 일단 가지고 와야 함
+		Book[] newBookList = member.getBookList();
+		
+		for(int i =0; i < newBookList.length; i++) { // getter
+			
+			//System.out.println(member.getBookList()[i]); // getter
+			if(newBookList[i]==null) { // getter
 				// 대여 가능 공간
 				
-				if(num == 0) {// 대여가능할때
-					coupon++;
-					bookList[i] = "Book [title=맛있는 지중해식 레시피] / CookBook [coupon=true]";
-				}else if(num == 1) {
-					bookList[i] = "Book [title=카페 샌드위치 마스터 클래스] / CookBook [coupon=false]";
-				}else if(num == 2 && age >= 19) {
-					bookList[i] = "Book [title=원피스 107] / AniBook [accessAge=19]";
-				}else if(num == 3 && age >=15) {
-					bookList[i] = "Book [title=주술회전 24] / AniBook [accessAge=15]";
-				} 
+//				if(num == 0) {// 대여가능할때
+					// -> 기존 쿠폰값(setter) = 기존 쿠폰값(getter) + 1
+					 // setter + getter
+					 // setter
+//				}else if(num == 1) {
+//					 
+//				}else if(num == 2 && member.getAge() >= selectBook.getAccessAge()) { // getter
+//					
+//				}else if(num == 3 && member.getAge() >= selectBook.getAccessAge()) { // getter
+//					
+//				} 
 				
+				
+				if(selectBook.isCoupon()) {
+					// 내가 대여한 책의 쿠폰이 true인 경우
+					member.setCoupon(member.getCoupon()+1); // 쿠폰이 true인 경우
+				}
+				if(member.getAge() >= selectBook.getAccessAge()) {
+					// 내가 대여한 책의 접근 제한 나이보다 많은 경우
+					newBookList[i] = books[num]; // 대여
+				}
+
 				break;
-				
 			}
 		}
+		member.setBookList(newBookList);
 		
 		// 대여 불가여부if문
-		if((num == 2 && age <19) || (num ==3 && age<15)) {
+		//  사용자 입력 age   < Book에 지정된 접근제한 age
+		if((member.getAge() < selectBook.getAccessAge())) { // getter
 			System.out.println("나이 제한으로 대여 불가능입니다.");
 		}else {
 			System.out.println("성공적으로 대여되었습니다.");
