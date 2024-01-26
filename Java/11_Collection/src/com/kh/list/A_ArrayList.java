@@ -81,7 +81,7 @@ public class A_ArrayList {
 		list.add(1, new Person("유재석", "압구정", 51));
 		list.add(3, new Person("강호동", "도곡동", 53));
 		
-		// 3. set : 해당 인섹스의 값을 변경
+		// 3. set : 해당 인덱스의 값을 변경
 		list.set(3, new Person("오은영", "삼성동", 57));
 		
 		// 4. size : 리스트 안에 몇 개의 데이터가 있는지
