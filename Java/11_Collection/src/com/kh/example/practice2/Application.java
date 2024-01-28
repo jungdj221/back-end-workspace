@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import com.kh.example.practice2.controller.SongController;
 import com.kh.example.practice2.model.Song;
 
 public class Application {
@@ -68,6 +69,8 @@ public class Application {
 		}
 	}
 	
+	SongController control = new SongController();
+	
 	public void case1() { //add는 자동으로 곡을 뒤쪽에 추가해줌
 		System.out.println("******마지막 위치에 곡 추가******");
 		System.out.print("가수 명 : ");
@@ -75,7 +78,8 @@ public class Application {
 		System.out.print("곡명 : ");
 		String songName = sc.nextLine();
 		songList.add(new Song(singerName, songName));
-		System.out.println("추가 성공");
+		control.case1(singerName, songName);
+		//System.out.println("추가 성공");
 	}
 	
 	public void case2() {
@@ -111,7 +115,7 @@ public class Application {
 			}
 		}
 		if(!chk) {
-			System.out.println("삭제할 곡이 없습니다");
+			System.out.println("키워드에 맞는 곡이 없습니다.");
 		}
 		
 	}
@@ -157,10 +161,19 @@ public class Application {
 	public void case7() {
 		System.out.println("******곡 명 오름차순 정렬******");
 		Collections.sort(songList);
+		for(Song s : songList) {
+			System.out.println(s);
+		}
+		
 	}
 	
 	public void case8() {
-		
+		System.out.println("******가수 명 내름차순 정렬******");
+		Collections.sort(songList);
+		Collections.reverse(songList);
+		for(Song s : songList) {
+			System.out.println(s);
+		}
 	}
 	
 

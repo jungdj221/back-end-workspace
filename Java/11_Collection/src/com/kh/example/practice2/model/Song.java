@@ -26,17 +26,18 @@ public class Song implements Comparable<Song>{
 		this.singer = singer;
 	}
 	
-//	@Override
-//	public String toString() {
-//		return "Song [title=" + title + ", singer=" + singer + "]";
-//	}
 	@Override
 	public String toString() {
 		return  singer + " - "+ title;
 	}
+//	@Override
+//	public int compareTo(Song o) {
+//		return this.title.compareTo(o.title);
+//	}
+	
 	@Override
 	public int compareTo(Song o) {
-		return this.title.compareTo(o.title);
+		return this.singer.compareTo(o.singer);
 	}
 	
 	
