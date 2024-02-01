@@ -1,6 +1,6 @@
 package com.kh.example.practice2.model;
 
-public class Song implements Comparable<Song>{
+public class Song{
 
 	private String title;
 	private String singer;
@@ -35,11 +35,13 @@ public class Song implements Comparable<Song>{
 //		return this.title.compareTo(o.title);
 //	}
 	
-	@Override
-	public int compareTo(Song o) {
-		return this.singer.compareTo(o.singer);
-	}
-	
+//	@Override
+//	public int compareTo(Song o) {
+//		return this.getSinger().compareTo(o.getSinger());
+//	}
+	/* 오름차순과 내림차순 처리를 따로 TitlAscending/artistDescending에서 했으므로, Song에서는 더이상
+	 * implements Comparable<Song>이 필요없음
+	 */
 	
 	
 }
