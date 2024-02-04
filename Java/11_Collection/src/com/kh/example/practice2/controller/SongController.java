@@ -73,17 +73,13 @@ public class SongController {
 		
 		
 	}
-	public Song updateSong(String searchSong, Song update) {
+	public Song updateSong(String search, Song update) {
 		for(Song song : songList) {
-			if(song.getTitle().equals(searchSong)) {
-				
+			if(song.getTitle().equals(search)) {
 				return songList.set(songList.indexOf(song), update);
-				
 			}
-			return null;
 		}
-		
-		
+		return null;
 	}
 	
 	public ArrayList<Song> ascTitle() {

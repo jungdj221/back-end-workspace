@@ -6,5 +6,6 @@ public interface Serverinfo {
 	 String URL = "jdbc:mysql://localhost:3306/kh";
 	 String USER = "root";
 	 String PASSWORD = "1234";
+	 String PASSWORD2 = "4750";
 	
 }

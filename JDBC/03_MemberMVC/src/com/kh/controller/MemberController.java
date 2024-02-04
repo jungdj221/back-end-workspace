@@ -24,7 +24,7 @@ public class MemberController {
 	}
 	
 	public Connection getConnect() throws SQLException {
-		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD);
+		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD2);
 		return conn;
 	}
 	
@@ -69,6 +69,10 @@ public class MemberController {
 		
 		ps.setString(1, id);
 		ps.setString(2, password);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		
 		
 		
 		return null;
