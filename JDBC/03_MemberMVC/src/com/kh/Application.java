@@ -9,16 +9,21 @@ import com.kh.model.Member;
 
 public class Application {
 
-	Scanner sc = new Scanner(System.in);
-	MemberController mc = new MemberController();
-	Member m = new Member();
+	// 다른 클래스 가져올때는 무조선 private으로 정보 은닉하기
+	private Scanner sc = new Scanner(System.in);
+	private MemberController mc = new MemberController();
+	private Member m = new Member();
 	
 	public static void main(String[] args) {
 		Application app = new Application();
-		app.mainMenu();
+		try {
+			app.mainMenu();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void mainMenu() {
+	public void mainMenu() throws SQLException {
 		
 		System.out.println("===== KH 사이트 =====");
 		
@@ -29,10 +34,10 @@ public class Application {
 			System.out.println("2. 로그인");
 			System.out.println("9. 종료");
 			System.out.print("메뉴 번호 입력 : ");
-			try {
+			
 				switch (Integer.parseInt(sc.nextLine())) {
 				case 1:
-					signUp();
+						signUp();
 					break;
 				case 2:
 					login();
@@ -42,10 +47,6 @@ public class Application {
 					check = false;
 					break;
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
 		}
 	}
 	
@@ -55,21 +56,21 @@ public class Application {
 		// true면 성공적으로 회원가입이 완료하였습니다. 출력
 		// false면 중복된 아이디입니다. 다시 입력해주세요.
 		
-		System.out.print("아이디 : ");
-		String id = sc.nextLine();
-		System.out.print("비밀번호 : ");
-		String pwd = sc.nextLine();
-		System.out.print("이름 : ");
-		String name = sc.nextLine();
 		
-		Member m = new Member(id, pwd, name);
-		if(mc.signUp(m) == true) System.out.println("성공적으로 회원가입이 완료하였습니다.");
-		else System.out.println("중복된 아이디입니다. 다시 입력해주세요.");
-		
-		
+
+			System.out.print("아이디 : ");
+			String id = sc.nextLine();
+			System.out.print("비밀번호 : ");
+			String pwd = sc.nextLine();
+			System.out.print("이름 : ");
+			String name = sc.nextLine();
+
+			Member m = new Member(id, pwd, name);
+			if (mc.signUp(m) == true) System.out.println("성공적으로 회원가입이 완료하였습니다.");
+			else System.out.println("중복된 아이디입니다. 다시 입력해주세요.");
 	}
 	
-	public void login() {
+	public void login() throws SQLException {
 		// 아이디 비밀번호를 사용자한테 입력받아
 		// MemberController의 login 메서드 반환 결과를 이름으로 받고
 		// 이름이 null이 아니면 "~~님, 환영 합니다." 출력
@@ -81,9 +82,18 @@ public class Application {
 		System.out.print("비밀번호 : ");
 		String pwd = sc.nextLine();
 		
+		String name = mc.login(id, pwd);
+		if(name!=null) {
+			System.out.println(name + "님 환영합니다");
+			memberMenu();
+		}
+		else {
+			System.out.println("틀린 아이디 또는 비밀번호입니다. 다시 입력해주세요.");
+		}
+		
 	}
 	
-	public void memberMenu() {
+	public void memberMenu() throws SQLException {
 		boolean check = true;
 		while(check) {
 			System.out.println("****** 회원 메뉴 ******");
@@ -106,15 +116,24 @@ public class Application {
 		}
 	}
 	
-	public void changePassword() {
+	public void changePassword() throws SQLException {
 		// 아이디, 현재 비밀번호, 새로운 비밀번호를 사용자한테 입력받아
 		// MemberController의 changePassword 메서드 반환 결과에 따라
 		// true면 "비밀번호 변경에 성공했습니다." 출력
 		// false면 "비밀번호 변경에 실패했습니다. 다시 입력해주세요" 출력
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		System.out.print("현재 비밀번호 : ");
+		String pwd = sc.nextLine();
+		System.out.print("새로운 비밀번호 : ");
+		String newPwd = sc.nextLine();
 		
+		
+		if(mc.changePassword(id, pwd, newPwd)) System.out.println("비밀번호 변경에 성공했습니다.");
+		else System.out.println("비밀번호 변경에 실패했습니다. 다시 입력해주세요");
 	}
 	
-	public void changeName() {
+	public void changeName() throws SQLException {
 		// 아이디, 비밀번호를 사용자한테 입력받아 사용자가 맞는지 확인 후
 		// - MemberController의 login 메서드 활용
 		// 이름이 null이 아니면
@@ -123,6 +142,22 @@ public class Application {
 		// MemberController의 changeName 메서드로 이름 변경
 		// "이름 변경에 성공하였습니다." 출력
 		// 이름이 null이면 "이름 변경에 실패하였습니다. 다시 입력해주세요." 출력
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String pwd = sc.nextLine();
+		
+		String name = mc.login(id, pwd);
+		if(name!=null) {
+			System.out.println("현재 설정된 이름 : " + name);
+			System.out.print("변경할 이름 : ");
+			String newName = sc.nextLine();
+			mc.changeName(id, newName);
+			System.out.println("이름 변경에 성공하였습니다.");
+		}else {
+			System.out.println("이름 변경에 실패하였습니다. 다시 입력해주세요.");
+		}
+		
 	}
 
 }
