@@ -45,6 +45,8 @@ SELECT name FROM member WHERE id = "asd" AND password = "asd";
  UPDATE bank SET balance = 500000 WHERE name = "정대윤";
  UPDATE bank SET balance = 500000 WHERE name = "신대규";
  
+ -- ----------------------------------------------------
+-- BOOK 문제 
  
  
  
