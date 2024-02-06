@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.kh.model.Book;
+import com.kh.model.RentBook;
 
 import config.Serverinfo;
 
@@ -23,7 +24,7 @@ public class BookController {
 	}
 	
 	public Connection getConnect() throws SQLException {
-		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD);
+		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD2);
 		return conn;
 	}
 	
@@ -85,6 +86,33 @@ public class BookController {
 		return result;
 	}
 	
+	// 로그인후 
+	// 1. 책 대여
+	public ArrayList<RentBook> rentBook(int bookNo) throws SQLException {
+		Connection conn = getConnect();
+		String query = "SELECT * FROM tb_book WHERE bk_no=?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		
+		ps.setInt(1, bookNo);
+		ResultSet rs = ps.executeQuery();
+		ArrayList<RentBook> myBookList = new ArrayList<>();
+		
+		if(rs.next()) {
+			int bookNumber = rs.getInt("bk_no");
+			String bookTitle = rs.getString("bk_title");
+			String bookAuthor = rs.getString("bk_author");
+			int bookPrice = rs.getInt("bk_price");
+			int bookPublicNo= rs.getInt("pub_no");
+			
+			myBookList.add(new RentBook(bookNumber, bookTitle, bookAuthor, bookPrice, bookPublicNo));
+			
+			return myBookList;
+		} 
+		closeAll(rs, ps, conn);
+		return null;
+		
+		
+	}
 	
 	
 }

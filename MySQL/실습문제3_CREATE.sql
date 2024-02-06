@@ -208,6 +208,11 @@ SELECT * FROM tb_rent_check2;
 -- 실습 문제
 -- 도서관리 프로그램을 만들기 위한 테이블 만들기
 
+DROP TABLE tb_rent;
+DROP TABLE tb_member;
+DROP TABLE tb_book;
+DROP TABLE tb_publisher;
+
 -- 1. 출판사들에 대한 데이터를 담기 위한 출판사 테이블(TB_PUBLISHER) 
 --    컬럼 : pub_no(출판사번호) -- 기본 키
 --           pub_name(출판사명) -- NOT NULL

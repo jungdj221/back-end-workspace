@@ -53,6 +53,7 @@ INSERT INTO tb_book(bk_title, bk_author) VALUES("테스트", "테스트");
 DELETE FROM tb_book WHERE bk_no = 9;
 
 SELECT * FROM tb_member;
+INSERT INTO tb_member(member_id, member_pwd, member_name) VALUES("user1", "user11", "pigeon");
  
  
  

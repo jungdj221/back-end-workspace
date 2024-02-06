@@ -21,7 +21,7 @@ public class MemberController {
 	}
 	
 	public Connection getConnect() throws SQLException {
-		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD);
+		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD2);
 		return conn;
 	}
 	
@@ -35,20 +35,7 @@ public class MemberController {
 		closeAll(ps, conn);
 	}
 	
-	public boolean idCheck(String id) throws SQLException {
-		Connection conn = getConnect();
-		String query = "SELECT id FROM tb_member WHERE member_id=?";
-		PreparedStatement ps = conn.prepareStatement(query);
-		ps.setString(1, id);
-		ResultSet rs = ps.executeQuery();
-		
-		String duplicatedId = null;
-		if(rs.next()) duplicatedId = rs.getString("member_id"); // 기존의 리스트있는 아이디 하나씩 가져오기
-		closeAll(rs, ps, conn);
-		
-		if(duplicatedId!=null) return true; // 중복비교를 위한 임시 아이디담아두는 곳이 채워져있으면 true
-		return false;
-	}
+	
 	
 	// 4. 회원등록
 	public int registerMember(Member m) throws SQLException {
@@ -70,8 +57,34 @@ public class MemberController {
 		
 	}
 	
-	// 5. 로그인
-	public void login() {
+	public boolean idCheck(String id) throws SQLException {
+		Connection conn = getConnect();
+		String query = "SELECT member_id FROM tb_member WHERE member_id=?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, id);
+		ResultSet rs = ps.executeQuery();
 		
+		String duplicatedId = null;
+		if(rs.next()) duplicatedId = rs.getString("member_id"); // 기존의 리스트있는 아이디 하나씩 가져오기
+		closeAll(rs, ps, conn);
+		
+		if(duplicatedId!=null) return true; // 중복비교를 위한 임시 아이디담아두는 곳이 채워져있으면 true
+		return false;
+	}
+	
+	// 5. 로그인
+	public String login(String id, String pwd) throws SQLException {
+		Connection conn = getConnect();
+		String query = "SELECT member_id, member_pwd, member_name FROM tb_member WHERE member_id=? AND member_pwd=?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		
+		ps.setString(1, id);
+		ps.setString(2, pwd);
+		ResultSet rs = ps.executeQuery();
+		
+		String name = null;
+		if(rs.next()) name = rs.getString("member_name");
+		closeAll(rs, ps, conn);
+		return name;
 	}
 }

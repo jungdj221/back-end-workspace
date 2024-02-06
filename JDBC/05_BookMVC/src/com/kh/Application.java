@@ -65,6 +65,7 @@ public class Application {
 	// 1. 전체 책 조회
 	public void printBookAll() throws SQLException {
 		// 반복문문을 이용해서 책 리스트 출력
+		System.out.println("===== 전체 책 조회 =====");
 		ArrayList<Book> list = bc.printBookAll();
 		for(Book book : list){
 			System.out.println(book);
@@ -77,6 +78,7 @@ public class Application {
 		// 책 제목, 책 저자를 사용자에게 입력받아
 		// 등록에 성공하면 "성공적으로 책을 등록했습니다." 출력
 		// 실패하면 "책을 등록하는데 실패했습니다." 출력
+		System.out.println("===== 책 등록 =====");
 		System.out.print("책 제목 : ");
 		String title = sc.nextLine();
 		System.out.print("책 저자 : ");
@@ -94,6 +96,7 @@ public class Application {
 		// 삭제할 책 번호를 선택을 사용자한테 입력 받아
 		// 삭제에 성공하면 "성공적으로 책을 삭제 했습니다." 출력
 		// 실패하면 "책을 삭제한느데 실패했습니다." 출력
+		System.out.println("===== 책 삭제 =====");
 		printBookAll();
 		System.out.print("삭제할 책 번호 : ");
 		int bookNo = Integer.parseInt(sc.nextLine());
@@ -108,30 +111,43 @@ public class Application {
 		// 아이디, 비밀번호, 이름을 사용자한테 입력 받아
 		// 성공하면 "성공적으로 회원가입을 완료하였습니다." 출력
 		// 실패하면 "회원가입에 실패했습니다." 출력
+		System.out.println("===== 회원가입 =====");
 		System.out.print("아이디 : ");
 		String id = sc.nextLine();
 		System.out.print("비밀번호 : ");
 		String pwd = sc.nextLine();
-		System.out.println("이름 : ");
+		System.out.print("이름 : ");
 		String name = sc.nextLine();
 		
-		m = new Member(id, pwd, name);
+		Member m = new Member(id, pwd, name);
 		int result = mc.registerMember(m);
 		if(result==1) System.out.println("성공적으로 회원가입을 완료하였습니다.");
-		else System.out.println();
+		else System.out.println("회원가입에 실패했습니다.");
 		
 		
 	}
 	
 	// 5. 로그인
-	public void login() {
+	public void login() throws SQLException {
 		// 아이디 비밀번호 사용자한테 입력받아
 		// 로그인 성공하면 "~~님, 환영합니다!" 출력
 		// --> MemberMenu() 호출
 		// 실패하면 "로그인에 실패했습니다." 출력
+		System.out.println("===== 로그인 =====");
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String pwd = sc.nextLine();
+		
+		String name = mc.login(id, pwd);
+		if(name!=null) {
+			System.out.println(name + "님 환영합니다.");
+			memberMenu();
+		}else System.out.println("로그인에 실패했습니다.");
+		
 	}
 	
-	public void memberMenu() {
+	public void memberMenu() throws SQLException {
 		boolean check = true;
 		while(check) {
 			System.out.println("1. 책 대여");
@@ -162,11 +178,17 @@ public class Application {
 	}
 	
 	// 1. 책 대여
-	public void rentBook() {
+	public void rentBook() throws SQLException {
 		// printBookAll(전체 책 조회 출력 후)
 		// 대여할 책 번호를 사용자한테 입력받아
 		// 대여에 성공하면 "성공적으로 책을 대여했습니다."
 		// 실패하면 "책을 대여하는대 실패했습니다." 출력
+		printBookAll();
+		System.out.print("대여할 책 번호 : ");
+		int bookNo = Integer.parseInt(sc.nextLine());
+		
+		if(bc.rentBook(bookNo)!=null) System.out.println("성공적으로 책을 대여했습니다.");
+		else System.out.println("책을 대여하는대 실패했습니다.");
 	}
 	
 	// 2. 내가 대여한 책 조회
