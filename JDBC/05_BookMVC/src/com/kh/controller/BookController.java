@@ -37,7 +37,8 @@ public class BookController {
 		closeAll(ps, conn);
 	}
 	
-	public String printBookAll() throws SQLException {
+	// 1. 전체 책 조회
+	public ArrayList<Book> printBookAll() throws SQLException {
 		Connection conn = getConnect();
 		
 		String query = "SELECT * FROM tb_book";
@@ -46,19 +47,44 @@ public class BookController {
 		ArrayList<Book> bookList = new ArrayList<>();
 		
 		while(rs.next()) {
-			int bookNumber = rs.getInt("bookNumber");
-			String bookTitle = rs.getString("bookTitle");
-			String bookAuthor = rs.getString("bookAuthor");
-			int bookPrice = rs.getInt("bookPrice");
-			int bookPublicNo= rs.getInt("bookPublicNo");
+			int bookNumber = rs.getInt("bk_no");
+			String bookTitle = rs.getString("bk_title");
+			String bookAuthor = rs.getString("bk_author");
+			int bookPrice = rs.getInt("bk_price");
+			int bookPublicNo= rs.getInt("pub_no");
 			
-			
+			bookList.add(new Book(bookNumber, bookTitle, bookAuthor, bookPrice, bookPublicNo));
 		}
+		closeAll(rs, ps, conn);
+		return bookList;
+	}
+	
+	// 2. 책 등록
+	public int registerBook(String title, String author) throws SQLException {
+		Connection conn = getConnect();
+		String query = "INSERT INTO tb_book(bk_title, bk_author) VALUES(?, ?)";
+		PreparedStatement ps = conn.prepareStatement(query);
+		
+		ps.setString(1, title);
+		ps.setString(2, author);
+		int result = ps.executeUpdate();
+		closeAll(ps, conn);
+		return result;
 		
 	}
 	
-	public void registerBook() {
+	// 3. 책 삭제
+	public int sellBook(int no) throws SQLException {
+		Connection conn = getConnect();
+		String qurey = "DELETE FROM tb_book WHERE bk_no=?";
+		PreparedStatement ps = conn.prepareStatement(qurey);
 		
+		ps.setInt(1, no);
+		int result = ps.executeUpdate();
+		closeAll(ps, conn);
+		return result;
 	}
+	
+	
 	
 }

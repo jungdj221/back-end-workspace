@@ -46,9 +46,13 @@ SELECT name FROM member WHERE id = "asd" AND password = "asd";
  UPDATE bank SET balance = 500000 WHERE name = "신대규";
  
  -- ----------------------------------------------------
--- BOOK 문제 
- 
- 
+-- BOOK 문제
+SELECT * FROM tb_book; 
+
+INSERT INTO tb_book(bk_title, bk_author) VALUES("테스트", "테스트");
+DELETE FROM tb_book WHERE bk_no = 9;
+
+SELECT * FROM tb_member;
  
  
  
