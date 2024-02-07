@@ -62,3 +62,5 @@ SELECT rent_no, bk_title, bk_author, rent_date, adddate(rent_date, interval 7 da
  DELETE FROM tb_rent WHERE rent_no =1;
  
 UPDATE tb_member SET status='Y' WHERE member_no=4;
+-- -----------------------------
+-- 서버와 연결하기
