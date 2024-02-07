@@ -183,6 +183,7 @@ public class Application {
 		// 대여할 책 번호를 사용자한테 입력받아
 		// 대여에 성공하면 "성공적으로 책을 대여했습니다."
 		// 실패하면 "책을 대여하는대 실패했습니다." 출력
+		System.out.println("===== 책 대여 =====");
 		printBookAll();
 		System.out.print("대여할 책 번호 : ");
 		int bookNo = Integer.parseInt(sc.nextLine());
@@ -196,6 +197,8 @@ public class Application {
 		// 내가 대여한 책들을 반복문을 이용하여 조회
 		// 단, 반납 기한도 같이 조회
 		// 대여 번호, 책 제목, 책 저자, 대여 날짜, 반납 기한 조회
+		System.out.println("===== 마이페이지 =====");
+		System.out.println("===== 내가 대여한 책 =====");
 	}
 	
 	// 3. 대여 취소

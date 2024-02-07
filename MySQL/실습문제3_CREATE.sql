@@ -302,11 +302,11 @@ CREATE TABLE tb_rent(
 
 -- ALTER로 FOREIGN KEY만 관리
 ALTER TABLE tb_book ADD CONSTRAINT pub_no_fk 
-	FOREIGN KEY (pub_no) REFERENCES tb_publisher(pub_no);
+	FOREIGN KEY (pub_no) REFERENCES tb_publisher(pub_no) ON DELETE CASCADE;
 ALTER TABLE tb_rent ADD CONSTRAINT member_no_fk 
-	FOREIGN KEY(member_no) REFERENCES tb_member(member_no); 
+	FOREIGN KEY(member_no) REFERENCES tb_member(member_no) ON DELETE CASCADE; 
 ALTER TABLE tb_rent ADD CONSTRAINT bk_no_fk 
-	FOREIGN KEY(bk_no) REFERENCES tb_book(bk_no);
+	FOREIGN KEY(bk_no) REFERENCES tb_book(bk_no) ON DELETE CASCADE; -- ON DELETE SET null=>없어지면 null로
 
 INSERT INTO tb_rent(member_no, bk_no) VALUES(1, 2);
 INSERT INTO tb_rent(member_no, bk_no) VALUES(1, 3);

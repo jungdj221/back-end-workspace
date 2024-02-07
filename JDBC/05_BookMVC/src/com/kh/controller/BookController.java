@@ -24,7 +24,7 @@ public class BookController {
 	}
 	
 	public Connection getConnect() throws SQLException {
-		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD2);
+		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD);
 		return conn;
 	}
 	
@@ -112,6 +112,13 @@ public class BookController {
 		return null;
 		
 		
+	}
+	
+	// 2. 내가 대여한 책 조회
+	public void printRentBook() throws SQLException {
+		Connection conn = getConnect();
+		String query = "SELECT * FROM ";
+		PreparedStatement ps = conn.prepareStatement(query);
 	}
 	
 	

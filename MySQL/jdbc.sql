@@ -54,6 +54,11 @@ DELETE FROM tb_book WHERE bk_no = 9;
 
 SELECT * FROM tb_member;
 INSERT INTO tb_member(member_id, member_pwd, member_name) VALUES("user1", "user11", "pigeon");
+DELETE FROM tb_book WHERE bk_no=11;
+
+SELECT * FROM tb_rent;
+SELECT * FROM tb_rent WHERE member_no =2;
+SELECT rent_no, bk_title, bk_author, rent_date, adddate(rent_date, interval 7 day)반납기한 FROM tb_rent JOIN tb_book USING(bk_no) WHERE member_no =1;
+ DELETE FROM tb_rent WHERE rent_no =1;
  
- 
- 
+UPDATE tb_member SET status='Y' WHERE member_no=4;

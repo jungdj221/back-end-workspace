@@ -21,7 +21,7 @@ public class MemberController {
 	}
 	
 	public Connection getConnect() throws SQLException {
-		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD2);
+		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD);
 		return conn;
 	}
 	
