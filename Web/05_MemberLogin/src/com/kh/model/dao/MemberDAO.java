@@ -14,7 +14,7 @@ public class MemberDAO {
 	public MemberDAO() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("로딩됨.");
+			System.out.println("로딩됨");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -30,45 +30,31 @@ public class MemberDAO {
 	}
 	
 	public void close(ResultSet rs, PreparedStatement ps, Connection conn) throws SQLException {
-		if(rs!=null) rs.close();
+		if(rs!=null)rs.close();
 		close(ps, conn);
 	}
 	
-	public int registerMember(Member vo) throws SQLException {
+	// DAO 개발할때 중요한건
+	// 매개변수(parameter) 뭘 가지고 오는지, 리턴타입 결과 출력이 어떤게 필요한지
+	public int register(Member m) throws SQLException {
 		Connection conn = getConnect();
-		String query = "INSERT INTO member VALUES(? ,? ,?)";
+		String query = "INSERT INTO member VALUES(?, ?, ?)";
 		PreparedStatement ps = conn.prepareStatement(query);
-		ps.setString(1, vo.getId());
-		ps.setString(2, vo.getPassword());
-		ps.setString(3, vo.getName());
-		int result =  ps.executeUpdate();
+		ps.setString(1, m.getId());
+		ps.setString(2, m.getPassword());
+		ps.setString(3, m.getName());
+		int result = ps.executeUpdate();
 		close(ps, conn);
 		return result;
 	}
 	
-	public ArrayList<Member> showAllMemeber() throws SQLException {
+	public Member login(String id, String password) throws SQLException {
 		Connection conn = getConnect();
-		String query = "SELECT * FROM member";
+		String query = "SELECT * FROM member WHERE id=? AND password=?";
 		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, id);
+		ps.setString(2, password);
 		ResultSet rs = ps.executeQuery();
-		ArrayList<Member> memberList = new ArrayList<>();
-		while(rs.next()) {
-			Member member = new Member(rs.getString("id"),
-									   rs.getString("password"),
-									   rs.getString("name"));
-			memberList.add(member); // add(여기에 new Member 다 넣어도 됨)
-		}
-		close(rs, ps, conn);
-		return memberList;
-	}
-	
-	public Member searchMember(String name) throws SQLException {
-		Connection conn = getConnect();
-		String query = "SELECT * FROM member WHERE name=?";
-		PreparedStatement ps = conn.prepareStatement(query);
-		ps.setString(1, name);
-		ResultSet rs = ps.executeQuery();
-		
 		Member member = null;
 		if(rs.next()) {
 			member = new Member(rs.getString("id"),
@@ -76,7 +62,39 @@ public class MemberDAO {
 								rs.getString("name"));
 		}
 		close(rs, ps, conn);
-		return member;
 		
+		return member;
+	}
+	
+	public Member findMember(String id) throws SQLException {
+		Connection conn = getConnect();
+		String query = "SELECT * FROM member WHERE id=?";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, id);
+		ResultSet rs = ps.executeQuery();
+		Member member = null;
+		if(rs.next()) {
+			member = new Member(rs.getString("id"),
+								rs.getString("password"),
+								rs.getString("name"));
+		}
+		close(rs, ps, conn);
+		
+		return member;
+	}
+	
+	// 전체 회원보기
+	public ArrayList<Member> allShowMember() throws SQLException{
+		Connection conn = getConnect();
+		String query = "SELECT * FROM member";
+		PreparedStatement ps = conn.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		ArrayList<Member> list = null;
+		while(rs.next()) {
+			list.add(new Member(rs.getString("id"),
+								rs.getString("password"),
+								rs.getString("name")));
+		}
+		return list;
 	}
 }
