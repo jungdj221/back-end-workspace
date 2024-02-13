@@ -1,22 +1,16 @@
+<%@page import="com.kh.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	body{
-		display: flex;
-		justify-content: center;
-	}
-	img{
-		width: 50%;
-		min-width: 500px;
-	}
-</style>
 </head>
 <body>
-	<img src="404.jpg">
+	<% 
+	Member info =(Member) request.getAttribute("info");
+	%>
+	<h1><%=info.getName() %>님 환영합니다.</h1>
 </body>
 </html>
