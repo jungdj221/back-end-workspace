@@ -89,7 +89,7 @@ public class MemberDAO {
 		String query = "SELECT * FROM member";
 		PreparedStatement ps = conn.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
-		ArrayList<Member> list = null;
+		ArrayList<Member> list = new ArrayList<>();
 		while(rs.next()) {
 			list.add(new Member(rs.getString("id"),
 								rs.getString("password"),

@@ -1,3 +1,4 @@
+<%@page import="com.kh.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,6 +10,10 @@
 <body>
 	<h1>회원 관리 기능</h1>
 	<ul>
+		<%
+		Member member = (Member) session.getAttribute("member");
+		if (member == null) {
+		%>
 		<%-- 로그인 되어 있지 않은 경우 --%>
 		<li><a href="views/register.html">회원가입</a></li>
 		<%--
@@ -23,7 +28,12 @@
 			-> 세션에 데이터 바인딩
 			-> views/login_result.jsp로 이동해서 정보 출력
 		 --%>
-		
+
+
+		<%
+		} else if(member!=null){
+		%>
+
 		<%-- 로그인 된 경우 --%>
 		<li><a href="views/search.html">회원검색</a></li>
 		<%-- 
@@ -40,6 +50,11 @@
 		<%--
 			로그아웃 : 로그아웃하고 index.jsp로 오면 됨
 		 --%>
+		<%
+		}
+		%>
 	</ul>
+
+
 </body>
 </html>
