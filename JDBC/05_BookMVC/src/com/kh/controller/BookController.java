@@ -22,7 +22,6 @@ public class BookController {
 			System.out.println("서버 연결x");
 		}
 	}
-	
 	public Connection getConnect() throws SQLException {
 		Connection conn = DriverManager.getConnection(Serverinfo.URL, Serverinfo.USER, Serverinfo.PASSWORD);
 		return conn;
