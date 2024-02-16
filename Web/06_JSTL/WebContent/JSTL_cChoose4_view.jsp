@@ -21,5 +21,5 @@
 			모르는 사람입니다. 비둘기
 		</c:otherwise>
 	</c:choose>
-</body>
+</body> 
 </html>

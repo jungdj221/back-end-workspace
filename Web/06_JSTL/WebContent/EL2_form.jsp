@@ -17,5 +17,5 @@
 		
 		<p><input type="submit" value="데이터 전송"></p>
 	</form>
-</body>
+</body> 
 </html>

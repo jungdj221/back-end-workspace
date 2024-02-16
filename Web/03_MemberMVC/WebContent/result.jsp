@@ -19,5 +19,5 @@
 <%-- JSP 주석 : 화면에 보이지 않음 --%>
 	<% String name = (String) request.getAttribute("name"); %>
 	<h1><%=name %>님, 환영합니다.</h1>
-</body>
+</body> 
 </html>

@@ -15,4 +15,4 @@
 	<%-- request.getRequestDispatcher("JSTL_cForEach6_view.jsp").forward(request, response); --%>
 	<jsp:forward page="JSTL_cForEach6_view.jsp" />
 </body>
-</html>
+</html> 

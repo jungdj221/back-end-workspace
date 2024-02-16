@@ -22,4 +22,4 @@
 	<h4>${num1} 과${num2}의 곱은 ${multiple}</h4>
 	
 </body>
-</html>
+</html> 

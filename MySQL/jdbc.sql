@@ -65,6 +65,9 @@ UPDATE tb_member SET status='Y' WHERE member_no=4;
 -- -----------------------------
 -- 서버와 연결하기
 
+-- web
+SELECT * FROM member;
+
 
 
 

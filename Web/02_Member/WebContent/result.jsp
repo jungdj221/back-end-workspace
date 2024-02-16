@@ -11,4 +11,4 @@
 	<%= request.getParameter("age") %>세인
 	<%= request.getParameter("name") %>가입 완료
 </body>
-</html>
+</html> 
