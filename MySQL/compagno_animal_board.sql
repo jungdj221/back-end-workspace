@@ -1,7 +1,15 @@
+DROP TABLE recommand_logic;
+DROP TABLE animal_board_image;
+DROP TABLE animal_board_video;
+DROP TABLE ad;
+DROP TABLE animal_board_comment;
+DROP TABLE animal_board_favorite;
+DROP TABLE animal_board;
 DROP TABLE animal_category;
+DROP TABLE user;  -- user는 가장 마지막
 
 -- 임시로 쓸 유저
-CREATE TABLE user (
+CREATE TABLE user (  -- 이거는 상현님 테이블에서 빌려왔어요.
 	user_id VARCHAR(20) PRIMARY KEY,
     user_name VARCHAR(20),
     user_phone VARCHAR(20),
@@ -30,7 +38,7 @@ CREATE TABLE animal_board(
     a_board_title varchar(50),
     a_board_content text,
     a_board_view int DEFAULT 0,
-    a_board_date DATETIME DEFAULT CURRENT_TIMESTAMP, 
+    a_board_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     user_id VARCHAR(20)
 );
 
@@ -48,7 +56,7 @@ CREATE TABLE animal_board_favorite(
 	a_favorite_code INT PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(20),
     a_board_code int,
-    a_favorite_date DATETIME DEFAULT CURRENT_TIMESTAMP
+    a_favorite_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE animal_board_image(
@@ -68,7 +76,7 @@ CREATE TABLE animal_board_comment(
     a_board_code INT,
     user_id VARCHAR(20),
     a_comment_content varchar(50),
-    a_comment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    a_comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     a_parent_code INT
 );
 
@@ -88,6 +96,7 @@ CREATE TABLE recommand_logic(
     x_total_value DOUBLE
 );
 
+
 ALTER TABLE animal_board ADD FOREIGN KEY (animal_category_code) REFERENCES animal_category (animal_category_code);
 ALTER table animal_board ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
 ALTER table animal_board_favorite ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
@@ -98,4 +107,4 @@ ALTER table animal_board_comment ADD FOREIGN KEY (a_board_code) REFERENCES anima
 ALTER table animal_board_comment ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
 ALTER TABLE animal_board_comment ADD FOREIGN KEY (a_parent_code) REFERENCES animal_board_comment(a_comment_code);
 ALTER TABLE ad ADD FOREIGN KEY(a_favorite_code) REFERENCES animal_board_favorite(a_favorite_code);
-ALTER TABLE recommand_logic ADD FOREIGN KEY (category_code) REFERENCES product_board (animal_category_code); -- 회영님 테이블
+ALTER TABLE recommand_logic ADD FOREIGN KEY (category_code) REFERENCES animal_category(animal_category_code);
