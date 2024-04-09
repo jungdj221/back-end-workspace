@@ -32,16 +32,16 @@ CREATE TABLE user (  -- 이거는 상현님 테이블에서 빌려왔어요.
 
 -- 임시로 쓸 테이블들
 CREATE TABLE animal_board(
-	a_board_code int PRIMARY KEY AUTO_INCREMENT,
+	animal_board_code int PRIMARY KEY AUTO_INCREMENT,
     animal_category_code INT,
-    a_main_image varchar(300),
-    a_board_title varchar(50),
-    a_board_content text,
-    a_board_view int DEFAULT 0,
-    a_board_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    animal_main_image varchar(300),
+    animal_board_title varchar(50),
+    animal_board_content text,
+    animal_board_view int DEFAULT 0,
+    animal_board_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     user_id VARCHAR(20)
 );
-
+select * from animal_board;
 CREATE TABLE animal_category(
 	animal_category_code INT PRIMARY KEY AUTO_INCREMENT,
     animal_type varchar(20)
@@ -53,37 +53,37 @@ INSERT INTO animal_category(animal_type) VALUES("비둘기");
 INSERT INTO animal_category(animal_type) VALUES("기타");
 
 CREATE TABLE animal_board_favorite(
-	a_favorite_code INT PRIMARY KEY AUTO_INCREMENT,
+	animal_favorite_code INT PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(20),
-    a_board_code int,
-    a_favorite_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    animal_board_code int,
+    animal_favorite_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE animal_board_image(
-	a_image_code INT PRIMARY KEY AUTO_INCREMENT,
-    a_board_code int,
-    a_board_image varchar(300)
+	animal_image_code INT PRIMARY KEY AUTO_INCREMENT,
+    animal_board_code int,
+    animal_board_image varchar(300)
 );
 
 CREATE TABLE animal_board_video(
-	a_video_code INT PRIMARY KEY AUTO_INCREMENT,
-    a_board_code int,
-    a_board_videp varchar(300)
+	animal_video_code INT PRIMARY KEY AUTO_INCREMENT,
+    animal_board_code int,
+    animal_board_videp varchar(300)
 );
 
 CREATE TABLE animal_board_comment(
-	a_comment_code INT PRIMARY KEY AUTO_INCREMENT,
-    a_board_code INT,
+	animal_comment_code INT PRIMARY KEY AUTO_INCREMENT,
+    animal_board_code INT,
     user_id VARCHAR(20),
-    a_comment_content varchar(50),
-    a_comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    a_parent_code INT
+    animal_comment_content varchar(50),
+    animal_comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    animal_parent_code INT
 );
 
 CREATE TABLE ad(
 	ad_code INT PRIMARY KEY AUTO_INCREMENT,
     ad_title VARCHAR(50),
-    a_favorite_code int
+    animal_favorite_code int
 );
 
 CREATE TABLE recommand_logic(
@@ -100,11 +100,11 @@ CREATE TABLE recommand_logic(
 ALTER TABLE animal_board ADD FOREIGN KEY (animal_category_code) REFERENCES animal_category (animal_category_code);
 ALTER table animal_board ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
 ALTER table animal_board_favorite ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
-ALTER table animal_board_favorite ADD FOREIGN KEY (a_board_code) REFERENCES animal_board(a_board_code);
-ALTER table animal_board_image ADD FOREIGN KEY (a_board_code) REFERENCES animal_board (a_board_code);
-ALTER table animal_board_video ADD FOREIGN KEY (a_board_code) REFERENCES animal_board (a_board_code);
-ALTER table animal_board_comment ADD FOREIGN KEY (a_board_code) REFERENCES animal_board (a_board_code);
+ALTER table animal_board_favorite ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board(animal_board_code);
+ALTER table animal_board_image ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board (animal_board_code);
+ALTER table animal_board_video ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board (animal_board_code);
+ALTER table animal_board_comment ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board (animal_board_code);
 ALTER table animal_board_comment ADD FOREIGN KEY (user_id) REFERENCES user (user_id);
-ALTER TABLE animal_board_comment ADD FOREIGN KEY (a_parent_code) REFERENCES animal_board_comment(a_comment_code);
-ALTER TABLE ad ADD FOREIGN KEY(a_favorite_code) REFERENCES animal_board_favorite(a_favorite_code);
+ALTER TABLE animal_board_comment ADD FOREIGN KEY (animal_parent_code) REFERENCES animal_board_comment(animal_comment_code);
+ALTER TABLE ad ADD FOREIGN KEY(animal_favorite_code) REFERENCES animal_board_favorite(animal_favorite_code);
 ALTER TABLE recommand_logic ADD FOREIGN KEY (category_code) REFERENCES animal_category(animal_category_code);
