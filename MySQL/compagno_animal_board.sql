@@ -8,6 +8,11 @@ DROP TABLE animal_board;
 DROP TABLE animal_category;
 DROP TABLE user;  -- user는 가장 마지막
 
+
+select * from animal_board; 
+select * from animal_board_image;
+select * from user;
+select * from animal_category;
 -- 임시로 쓸 유저
 CREATE TABLE user (  -- 이거는 상현님 테이블에서 빌려왔어요.
 	user_id VARCHAR(20) PRIMARY KEY,
@@ -17,14 +22,14 @@ CREATE TABLE user (  -- 이거는 상현님 테이블에서 빌려왔어요.
     user_nickname VARCHAR(20),
     user_email  VARCHAR(50),
     user_status char(1) DEFAULT 'n',
-    user_enroll_date TIMESTAMP DEFAULT NOW(),
+    user_enroll_date TIMESTAMP DEFAULT current_timestamp,
     user_quit_date TIMESTAMP,
     user_role VARCHAR(20) DEFAULT 'ROLE_USER',
     user_img VARCHAR(500),
     user_point INT DEFAULT 0
     );
     
-    SELECT * FROM user;
+   
     
     INSERT INTO user(user_id, user_name, user_nickname, user_img) VALUES('pigeon221','정둘기','처음둥지지어본비둘기','비둘기사진1');
     INSERT INTO user(user_id, user_name, user_nickname, user_img) VALUES('pigeon331','김둘기','둥지지어본비둘기','비둘기사진2');
@@ -38,10 +43,11 @@ CREATE TABLE animal_board(
     animal_board_title varchar(50),
     animal_board_content text,
     animal_board_view int DEFAULT 0,
-    animal_board_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    animal_board_date TIMESTAMP DEFAULT current_timestamp, 
     user_id VARCHAR(20)
 );
-select * from animal_board;
+
+
 CREATE TABLE animal_category(
 	animal_category_code INT PRIMARY KEY AUTO_INCREMENT,
     animal_type varchar(20)
@@ -56,7 +62,7 @@ CREATE TABLE animal_board_favorite(
 	animal_favorite_code INT PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(20),
     animal_board_code int,
-    animal_favorite_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    animal_favorite_date TIMESTAMP DEFAULT current_timestamp
 );
 
 CREATE TABLE animal_board_image(
@@ -76,7 +82,7 @@ CREATE TABLE animal_board_comment(
     animal_board_code INT,
     user_id VARCHAR(20),
     animal_comment_content varchar(50),
-    animal_comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    animal_comment_date TIMESTAMP DEFAULT current_timestamp,
     animal_parent_code INT
 );
 
