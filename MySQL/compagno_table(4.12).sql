@@ -309,8 +309,8 @@ CREATE TABLE animal_board(
 	animal_board_code INT PRIMARY KEY AUTO_INCREMENT,
     animal_category_code INT,
     animal_main_image VARCHAR(300),
-    animal_board_title VARCHAR(50),
-    animal_board_content TEXT,
+    animal_board_title varchar(100) ,
+    animal_board_content longtext,
     animal_board_view INT DEFAULT 0,
     animal_board_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     user_id VARCHAR(20)
@@ -528,7 +528,7 @@ ALTER TABLE oneday_class_review_comment ADD FOREIGN KEY (odc_review_code) REFERE
 -- ALTER TABLE oneday_class_reivew_comment ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 
 ALTER TABLE animal_board ADD FOREIGN KEY (animal_category_code) REFERENCES animal_category(animal_category_code);
-ALTER TABLE animal_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
+ALTER TABLE animal_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id); -- 변경후 이것만 문제
 ALTER TABLE animal_board_favorite ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 ALTER TABLE animal_board_favorite ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board(animal_board_code);
 ALTER TABLE animal_board_image ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board(animal_board_code);
