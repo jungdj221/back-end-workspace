@@ -312,7 +312,7 @@ CREATE TABLE animal_board(
     animal_board_title varchar(100) ,
     animal_board_content longtext,
     animal_board_view INT DEFAULT 0,
-    animal_board_date  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    animal_board_date  TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), 
     user_id VARCHAR(20)
 );
 
@@ -333,7 +333,7 @@ CREATE TABLE animal_board_favorite(
 	animal_favorite_code INT PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(20),
     animal_board_code INT,
-    animal_favorite_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    animal_favorite_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP()
 );
 
 CREATE TABLE animal_board_image(
@@ -353,7 +353,7 @@ CREATE TABLE animal_board_comment(
     animal_board_code INT,
     user_id VARCHAR(20),
     animal_comment_content VARCHAR(50),
-    animal_comment_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    animal_comment_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     animal_parent_code INT
 );
 
@@ -536,7 +536,7 @@ ALTER TABLE animal_board_image ADD FOREIGN KEY (animal_board_code) REFERENCES an
 ALTER TABLE animal_board_video ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board(animal_board_code);
 ALTER TABLE animal_board_comment ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board(animal_board_code);
 ALTER TABLE animal_board_comment ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
-ALTER TABLE animal_board_comment ADD FOREIGN KEY (animal_parent_code) REFERENCES animal_board_comment(animal_comment_code);
+-- ALTER TABLE animal_board_comment ADD FOREIGN KEY (animal_parent_code) REFERENCES animal_board_comment(animal_comment_code);
 
 ALTER TABLE qna_q_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 -- ALTER TABLE qna_q_board ADD FOREIGN KEY (user_nickname) REFERENCES user(user_nickname);
