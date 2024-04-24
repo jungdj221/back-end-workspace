@@ -96,6 +96,7 @@ CREATE TABLE lost_board(
 	lost_board_code	INT PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(20),
     user_img VARCHAR(500),
+    user_nickname VARCHAR(20),
     user_phone VARCHAR(20),
     lost_title VARCHAR(50) NOT NULL,
     lost_regi_date TIMESTAMP DEFAULT current_timestamp ON UPDATE current_timestamp,
@@ -106,7 +107,7 @@ CREATE TABLE lost_board(
     lost_location VARCHAR(50) NOT NULL,
     lost_animal_kind VARCHAR(30),
     lost_animal_color VARCHAR(30),
-    lost_animal_gender VARCHAR(10) CHECK (lost_animal_gender IN ('수컷', '암컷', '모름')) DEFAULT '수컷',
+    lost_animal_gender VARCHAR(10) CHECK (lost_animal_gender IN ('수컷', '암컷', '모름')) DEFAULT '수컷' NOT NULL,
     lost_animal_age INT,
     lost_animal_feature TEXT NOT NULL,
     lost_animal_RFID INT
@@ -316,7 +317,6 @@ CREATE TABLE animal_board(
     user_id VARCHAR(20)
 );
 
-
 -- animal_category
 CREATE TABLE animal_category(
 	animal_category_code INT PRIMARY KEY AUTO_INCREMENT,
@@ -333,7 +333,7 @@ CREATE TABLE animal_board_favorite(
 	animal_favorite_code INT PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(20),
     animal_board_code INT,
-    animal_favorite_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP()
+    animal_favorite_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE animal_board_image(
@@ -353,7 +353,7 @@ CREATE TABLE animal_board_comment(
     animal_board_code INT,
     user_id VARCHAR(20),
     animal_comment_content VARCHAR(50),
-    animal_comment_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    animal_comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     animal_parent_code INT
 );
 
@@ -381,7 +381,7 @@ CREATE TABLE parsing(
 -- ======================================== [YB] QNA ========================================
 -- qna_question
 CREATE TABLE qna_q_board(
-	qna_q_board_code INT PRIMARY KEY AUTO_INCREMENT,
+	qna_q_code INT PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(20),
     user_nickname VARCHAR(20),
     qna_q_title VARCHAR(30) NOT NULL,
@@ -391,15 +391,15 @@ CREATE TABLE qna_q_board(
 );
 
 CREATE TABLE qna_q_board_image(
-	qna_q_board_img_code INT PRIMARY KEY AUTO_INCREMENT,
-    qna_q_board_code INT,
-    qna_q_board_url VARCHAR(300)
+	qna_q_img_code INT PRIMARY KEY AUTO_INCREMENT,
+    qna_q_code INT,
+    qna_q_url VARCHAR(300)
 );
 
 -- qna_answer
 CREATE TABLE qna_a_board(
 	qna_a_code INT PRIMARY KEY AUTO_INCREMENT,
-	qna_q_board_code INT,
+	qna_q_code INT,
     user_id VARCHAR(20),
     qna_a_title VARCHAR(30) NOT NULL,
     qna_a_content TEXT NOT NULL,
@@ -509,7 +509,7 @@ ALTER TABLE sitter_board_comment ADD FOREIGN KEY (sitter_com_parent_code) REFERE
 ALTER TABLE product_board ADD FOREIGN KEY (animal_category_code) REFERENCES animal_category(animal_category_code);
 ALTER TABLE product_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 ALTER TABLE product_board_image ADD FOREIGN KEY (product_board_code) REFERENCES product_board(product_board_code);
-ALTER TABLE product_board_comment ADD FOREIGN KEY (product_board_code) REFERENCES product_board(product_board_code);
+ALTER TABLE product_board_comment ADD FOREIGN KEY (product_board_code) REFERENCES product_board(product_board_code) ON DELETE CASCADE;
 ALTER TABLE product_board_comment ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 ALTER TABLE product_board_comment ADD FOREIGN KEY (product_parent_code) REFERENCES product_board_comment(product_comment_code);
 ALTER TABLE product_board_recommend ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
@@ -541,10 +541,10 @@ ALTER TABLE animal_board_comment ADD FOREIGN KEY (user_id) REFERENCES user(user_
 
 ALTER TABLE qna_q_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 -- ALTER TABLE qna_q_board ADD FOREIGN KEY (user_nickname) REFERENCES user(user_nickname);
-ALTER TABLE qna_q_board_image ADD FOREIGN KEY (qna_q_board_code) REFERENCES qna_q_board(qna_q_board_code);
-ALTER TABLE qna_a_board ADD FOREIGN KEY (qna_q_board_code) REFERENCES qna_q_board(qna_q_board_code);
-ALTER TABLE qna_a_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
-ALTER TABLE qna_a_board_image ADD FOREIGN KEY (qna_a_code) REFERENCES qna_a_board(qna_a_code);
+-- ALTER TABLE qna_q_image_board ADD FOREIGN KEY (qna_q_code) REFERENCES qna_q_board(qna_q_code);
+-- ALTER TABLE qna_a_board ADD FOREIGN KEY (qna_q_code) REFERENCES qna_q_board(qna_q_code);
+-- ALTER TABLE qna_a_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
+-- ALTER TABLE qna_a_board_image ADD FOREIGN KEY (qna_a_code) REFERENCES qna_a_board(qna_a_code);
 
 ALTER TABLE notice_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 ALTER TABLE notice_board_comment ADD FOREIGN KEY (notice_board_code) REFERENCES notice_board(notice_board_code);
@@ -552,7 +552,7 @@ ALTER TABLE notice_board_comment ADD FOREIGN KEY (user_id) REFERENCES user(user_
 ALTER TABLE notice_board_comment ADD FOREIGN KEY (notice_parent_code) REFERENCES notice_board_comment(notice_comment_code);
 ALTER TABLE notice_board_image ADD FOREIGN KEY (notice_board_code) REFERENCES notice_board(notice_board_code);
 
-ALTER TABLE note_file ADD FOREIGN KEY (note_code) REFERENCES note(note_code);
+ALTER TABLE note_file ADD FOREIGN KEY (note_code) REFERENCES note(note_code) ON DELETE CASCADE;
 
 ALTER TABLE ad ADD FOREIGN KEY(animal_favorite_code) REFERENCES animal_board_favorite(animal_favorite_code);
 ALTER TABLE recommand_logic ADD FOREIGN KEY (category_code) REFERENCES animal_category(animal_category_code);
