@@ -312,7 +312,7 @@ CREATE TABLE animal_board(
     animal_board_title varchar(100) ,
     animal_board_content longtext,
     animal_board_view INT DEFAULT 0,
-    animal_board_date  TIMESTAMP DEFAULT CURRENT_TIMESTAMP(), 
+    animal_board_date  DATETIME DEFAULT CURRENT_TIMESTAMP, 
     user_id VARCHAR(20)
 );
 
@@ -333,7 +333,7 @@ CREATE TABLE animal_board_favorite(
 	animal_favorite_code INT PRIMARY KEY AUTO_INCREMENT,
     user_id VARCHAR(20),
     animal_board_code INT,
-    animal_favorite_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP()
+    animal_favorite_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE animal_board_image(
@@ -353,7 +353,7 @@ CREATE TABLE animal_board_comment(
     animal_board_code INT,
     user_id VARCHAR(20),
     animal_comment_content VARCHAR(50),
-    animal_comment_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    animal_comment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     animal_parent_code INT
 );
 
@@ -529,7 +529,6 @@ ALTER TABLE oneday_class_review_comment ADD FOREIGN KEY (odc_review_code) REFERE
 -- ALTER TABLE oneday_class_reivew_comment ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 
 ALTER TABLE animal_board ADD FOREIGN KEY (animal_category_code) REFERENCES animal_category(animal_category_code);
--- show create table animal_board; 
 ALTER TABLE animal_board ADD FOREIGN KEY (user_id) REFERENCES user(user_id); -- 변경후 이것만 문제
 ALTER TABLE animal_board_favorite ADD FOREIGN KEY (user_id) REFERENCES user(user_id);
 ALTER TABLE animal_board_favorite ADD FOREIGN KEY (animal_board_code) REFERENCES animal_board(animal_board_code);
