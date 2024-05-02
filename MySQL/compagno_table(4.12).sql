@@ -354,9 +354,12 @@ CREATE TABLE animal_board_comment(
     user_id VARCHAR(20),
     animal_comment_content VARCHAR(50),
     animal_comment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    animal_parent_code INT
+    animal_parent_code INT,
+    animal_comment_tag VARCHAR(20)
 );
-
+ALTER table animal_board_comment add column animal_comment_tag VARCHAR(20) default(null);
+ALTER table animal_board_favorite add column animal_favorite_count INT default 0;
+alter table user drop column animal_comment_tag;
 -- ======================================== [YB] PARSING ========================================
 CREATE TABLE parsing(
 	num INT PRIMARY KEY AUTO_INCREMENT,
